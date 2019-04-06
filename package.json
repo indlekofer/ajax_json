@@ -1,0 +1,36 @@
+{
+  "name": "@indlekofer/ajax_json",
+  "version": "1.0.0",
+  "description": "ajax request",
+  "author": "Daniel Indlekofer <daniel@indlekofer.org>",
+  "keywords": [],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/indlekofer/ajax_json.git"
+  },
+  "main": "./cjs/index.js",
+  "scripts": {
+    "build:commonjs": "babel src --out-dir cjs",
+    "build": "npm run build:commonjs",
+    "test": "mocha --require @babel/register",
+    "test:cover": "nyc --reporter=text mocha --require @babel/register",
+    "lint": "eslint ./src/",
+    "lint:fix": "eslint ./src/ --fix"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
+    "sinon": "^7.3.1"
+  },
+  "dependencies": {
+    "@indlekofer/format_url": "^1.0.0",
+    "promise": "^8.0.3"
+  }
+}
