@@ -27,6 +27,10 @@ describe('index', () => {
     expect(requests.length).to.equal(1);
     requests[0].respond(200, { "Content-Type": "application/json" }, '{ "id": 12, "comment": "Hey there" }');
   });
+  it('timeout', (done) => {
+    ajaxJson({timeout: 500}).catch((e) => done(e));
+    expect(requests.length).to.equal(1);
+  });
 
   it('resolve response 404', (done) => {
     ajaxJson({}).then((req) => {

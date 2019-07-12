@@ -62,9 +62,9 @@ export default (settings, req = new XMLHttpRequest()) => {
       reject(req);
     };
 
+    req.open(settings.method, formatUrl(settings.url, settings.query), settings.async);
     req.withCredentials = settings.withCredentials;
     req.timeout = settings.timeout;
-    req.open(settings.method, formatUrl(settings.url, settings.query), settings.async);
     //headers
     req.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     req.setRequestHeader('Accept', 'application/json');
