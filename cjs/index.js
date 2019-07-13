@@ -57,9 +57,12 @@ exports.config = config;
 var _default = function _default(settings) {
   var req = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new XMLHttpRequest();
   return new _promise["default"](function (resolve, reject) {
-    //var req = new XMLHttpRequest();
     //mutate settings with some defaults
-    config(settings); //callbacks
+    config(settings);
+    req.open(settings.method, (0, _format_url["default"])(settings.url, settings.query), settings.async); //In IE, timeout and withCredentials property my be set only after calling the open() method and before calling the send() method.
+
+    req.withCredentials = settings.withCredentials;
+    req.timeout = settings.timeout; //callbacks
 
     req.onreadystatechange = function () {
       if (req.readyState === 4) {
@@ -70,7 +73,7 @@ var _default = function _default(settings) {
           req.error = false;
 
           try {
-            if (req.responseText == '') req.responseBody = {};else req.responseBody = JSON.parse(req.responseText);
+            if (typeof req.responseText == 'undefined' || req.responseText == '') req.responseJson = {};else req.responseJson = JSON.parse(req.responseText);
             resolve(req);
           } catch (e) {
             req.error = _constants.ERROR_JSON;
@@ -83,11 +86,8 @@ var _default = function _default(settings) {
     req.ontimeout = function () {
       req.error = _constants.ERROR_TIMEOUT;
       reject(req);
-    };
+    }; //headers
 
-    req.open(settings.method, (0, _format_url["default"])(settings.url, settings.query), settings.async);
-    req.withCredentials = settings.withCredentials;
-    req.timeout = settings.timeout; //headers
 
     req.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     req.setRequestHeader('Accept', 'application/json');

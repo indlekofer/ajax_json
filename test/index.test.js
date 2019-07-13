@@ -4,7 +4,7 @@ import ajaxJson, { ERROR_JSON, ERROR_REJECT } from '../src/index';
 import { expect } from 'chai';
 
 describe('index', () => {
-  var requests;
+  let requests;
   beforeEach(() => {
     requests = []
     global.XMLHttpRequest = sinon.useFakeXMLHttpRequest();
@@ -20,23 +20,19 @@ describe('index', () => {
 
   it('resolve response 200', (done) => {
     ajaxJson({}).then((req) => {
-      expect(req.responseBody.id).to.equal(12);
-      expect(req.responseBody.comment).to.equal("Hey there");
+      expect(req.responseJson.id).to.equal(12);
+      expect(req.responseJson.comment).to.equal("Hey there");
       done();
     }).catch((e) => done(e));
     expect(requests.length).to.equal(1);
     requests[0].respond(200, { "Content-Type": "application/json" }, '{ "id": 12, "comment": "Hey there" }');
   });
-  it('timeout', (done) => {
-    ajaxJson({timeout: 500}).catch((e) => done(e));
-    expect(requests.length).to.equal(1);
-  });
 
   it('resolve response 404', (done) => {
     ajaxJson({}).then((req) => {
       expect(req.status).to.equal(404);
-      expect(req.responseBody.id).to.equal(12);
-      expect(req.responseBody.comment).to.equal("Hey there");
+      expect(req.responseJson.id).to.equal(12);
+      expect(req.responseJson.comment).to.equal("Hey there");
       done();
     }).catch((e) => done(e));
     expect(requests.length).to.equal(1);
@@ -66,8 +62,8 @@ describe('index', () => {
   it('request body', (done) => {
     ajaxJson({body: {test:1}}).then((req) => {
       expect(req.status).to.equal(200);
-      expect(req.responseBody.id).to.equal(12);
-      expect(req.responseBody.comment).to.equal("Hey there");
+      expect(req.responseJson.id).to.equal(12);
+      expect(req.responseJson.comment).to.equal("Hey there");
       expect(req.requestBody).to.equal('{"test":1}');
       done();
     }).catch((e) => done(e));

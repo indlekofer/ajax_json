@@ -12,7 +12,7 @@ request(settings)
   .then((req) => {
     console.log(req.status);
     //containes the parsed json object
-    console.log(req.responseBody);
+    console.log(req.responseJson);
   }, (req) => {
     //e.g.: timeout or json parser problems
     console.log(req.error);
