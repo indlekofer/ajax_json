@@ -1,15 +1,11 @@
 import formatUrl from '@indlekofer/format_url';
 import Promise from 'promise'; 
-import {
-  ERROR_TIMEOUT,
-  ERROR_JSON,
-  ERROR_REJECT
-} from './constants';
-export {
-  ERROR_TIMEOUT,
-  ERROR_JSON,
-  ERROR_REJECT
-};
+
+const name = '@indlekofer/ajax_json/ERROR_';
+
+export const ERROR_TIMEOUT = name + 'TIMEOUT';
+export const ERROR_JSON = name + 'JSON';
+export const ERROR_REJECT = name + 'REJECT';
 
 export const config = (settings) => {
   //defaults

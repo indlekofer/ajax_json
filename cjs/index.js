@@ -3,33 +3,21 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "ERROR_TIMEOUT", {
-  enumerable: true,
-  get: function get() {
-    return _constants.ERROR_TIMEOUT;
-  }
-});
-Object.defineProperty(exports, "ERROR_JSON", {
-  enumerable: true,
-  get: function get() {
-    return _constants.ERROR_JSON;
-  }
-});
-Object.defineProperty(exports, "ERROR_REJECT", {
-  enumerable: true,
-  get: function get() {
-    return _constants.ERROR_REJECT;
-  }
-});
-exports["default"] = exports.config = void 0;
+exports["default"] = exports.config = exports.ERROR_REJECT = exports.ERROR_JSON = exports.ERROR_TIMEOUT = void 0;
 
 var _format_url = _interopRequireDefault(require("@indlekofer/format_url"));
 
 var _promise = _interopRequireDefault(require("promise"));
 
-var _constants = require("./constants");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var name = '@indlekofer/ajax_json/ERROR_';
+var ERROR_TIMEOUT = name + 'TIMEOUT';
+exports.ERROR_TIMEOUT = ERROR_TIMEOUT;
+var ERROR_JSON = name + 'JSON';
+exports.ERROR_JSON = ERROR_JSON;
+var ERROR_REJECT = name + 'REJECT';
+exports.ERROR_REJECT = ERROR_REJECT;
 
 var config = function config(settings) {
   //defaults
@@ -67,7 +55,7 @@ var _default = function _default(settings) {
     req.onreadystatechange = function () {
       if (req.readyState === 4) {
         if (req.status == 0 && req.statusText == null) {
-          req.error = _constants.ERROR_REJECT;
+          req.error = ERROR_REJECT;
           reject(req);
         } else {
           req.error = false;
@@ -76,7 +64,7 @@ var _default = function _default(settings) {
             if (typeof req.responseText == 'undefined' || req.responseText == '') req.responseJson = {};else req.responseJson = JSON.parse(req.responseText);
             resolve(req);
           } catch (e) {
-            req.error = _constants.ERROR_JSON;
+            req.error = ERROR_JSON;
             reject(req);
           }
         }
@@ -84,7 +72,7 @@ var _default = function _default(settings) {
     };
 
     req.ontimeout = function () {
-      req.error = _constants.ERROR_TIMEOUT;
+      req.error = ERROR_TIMEOUT;
       reject(req);
     }; //headers
 

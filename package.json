@@ -1,6 +1,6 @@
 {
   "name": "@indlekofer/ajax_json",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "ajax request",
   "author": "Daniel Indlekofer <daniel@indlekofer.org>",
   "keywords": [],
